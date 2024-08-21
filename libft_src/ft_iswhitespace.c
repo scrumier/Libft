@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scrumier <scrumier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mwojtasi <mwojtasi@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 15:30:45 by scrumier          #+#    #+#             */
-/*   Updated: 2024/05/28 15:15:44 by scrumier         ###   ########.fr       */
+/*   Created: 2024/05/19 19:34:45 by mwojtasi          #+#    #+#             */
+/*   Updated: 2024/05/19 19:35:35 by mwojtasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-
-size_t	ft_strlen(const char *s)
+int	ft_iswhitespace(char c)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != 0)
-		i++;
-	return (i);
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r');
 }

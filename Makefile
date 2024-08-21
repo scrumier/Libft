@@ -6,7 +6,7 @@
 #    By: scrumier <scrumier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 14:25:42 by scrumier          #+#    #+#              #
-#    Updated: 2024/03/25 17:04:52 by scrumier         ###   ########.fr        #
+#    Updated: 2024/08/15 10:17:09 by scrumier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBFT_SRC		=	$(addprefix $(LIBFT_SRC_DIR), \
 					ft_putnbr_fd.c ft_strdup.c ft_strlen.c ft_strrchr.c \
 					ft_toupper.c ft_calloc.c ft_isdigit.c ft_memchr.c \
 					ft_memset.c ft_putstr_fd.c ft_strjoin.c ft_strmapi.c \
-					ft_strtrim.c ft_striteri.c ft_atoi.c)
+					ft_strtrim.c ft_striteri.c ft_atoi.c ft_iswhitespace.c \
+					ft_append_str.c free_null.c ft_strjoin_free.c)
 
 GNL_SRC			=	$(addprefix $(GNL_SRC_DIR), \
 					get_next_line.c get_next_line_utils.c)
@@ -40,8 +41,8 @@ LIBFT_OBJ = $(addprefix $(LIBFT_OBJ_DIR), $(LIBFT_SRC:$(LIBFT_SRC_DIR)%.c=%.o))
 GNL_OBJ = $(addprefix $(GNL_OBJ_DIR), $(GNL_SRC:$(GNL_SRC_DIR)%.c=%.o))
 PRINTF_OBJ = $(addprefix $(PRINTF_OBJ_DIR), $(PRINTF_SRC:$(PRINTF_SRC_DIR)%.c=%.o))
 
-LIBFT_CC = gcc
-LIBFT_FLAGS = -Wall -Wextra -Werror
+LIBFT_CC = cc
+LIBFT_FLAGS = -Wall -Wextra -Werror -g3
 
 LIBFT_NAME = libft.a
 
@@ -49,13 +50,13 @@ LIBFT_RM = rm -rf
 
 all: $(LIBFT_NAME)
 
-$(LIBFT_OBJ_DIR)%.o: $(LIBFT_SRC_DIR)%.c | $(LIBFT_OBJ_DIR) Makefile
+$(LIBFT_OBJ_DIR)%.o: $(LIBFT_SRC_DIR)%.c | $(LIBFT_OBJ_DIR)
 	$(LIBFT_CC) $(LIBFT_FLAGS) -MMD -MP -c $< -o $@
 
-$(GNL_OBJ_DIR)%.o: $(GNL_SRC_DIR)%.c | $(GNL_OBJ_DIR) Makefile
+$(GNL_OBJ_DIR)%.o: $(GNL_SRC_DIR)%.c | $(GNL_OBJ_DIR)
 	$(LIBFT_CC) $(LIBFT_FLAGS) -MMD -MP -c $< -o $@
 
-$(PRINTF_OBJ_DIR)%.o: $(PRINTF_SRC_DIR)%.c | $(PRINTF_OBJ_DIR) Makefile
+$(PRINTF_OBJ_DIR)%.o: $(PRINTF_SRC_DIR)%.c | $(PRINTF_OBJ_DIR)
 	$(LIBFT_CC) $(LIBFT_FLAGS) -MMD -MP -c $< -o $@
 
 $(LIBFT_OBJ_DIR) $(GNL_OBJ_DIR) $(PRINTF_OBJ_DIR):
@@ -65,7 +66,7 @@ $(LIBFT_OBJ_DIR) $(GNL_OBJ_DIR) $(PRINTF_OBJ_DIR):
 -include $(GNL_OBJ:.o=.d)
 -include $(PRINTF_OBJ:.o=.d)
 
-$(LIBFT_NAME): $(LIBFT_OBJ) $(GNL_OBJ) $(PRINTF_OBJ) Makefile
+$(LIBFT_NAME): $(LIBFT_OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
 	ar rc $@ $^
 	ranlib $@
 

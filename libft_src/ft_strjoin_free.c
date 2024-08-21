@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scrumier <scrumier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 15:30:41 by scrumier          #+#    #+#             */
-/*   Updated: 2024/03/25 16:30:10 by scrumier         ###   ########.fr       */
+/*   Created: 2024/08/15 10:15:44 by scrumier          #+#    #+#             */
+/*   Updated: 2024/08/16 11:48:21 by scrumier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-	size_t	c;
+	char	*str;
+	int		i;
+	size_t	j;
 
-	c = 0;
-	if (n == 0)
-		return (0);
-	if (s1 == NULL || s2 == NULL || *s1 == '\0' || *s2 == '\0')
-		return (-1);
-	while (s1[c] && s2[c] && s1[c] == s2[c] && c < n - 1)
-		c++;
-	return (((unsigned char)(s1[c]) - (unsigned char)(s2[c])));
+	i = -1;
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char *)malloc(
+			sizeof(*s1) * (ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1));
+	if (!str)
+		return (NULL);
+	while (s1[++i])
+		str[j++] = s1[i];
+	i = -1;
+	while (s2[++i])
+		str[j++] = s2[i];
+	str[j] = 0;
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
+	return (str);
 }
